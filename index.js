@@ -24,8 +24,13 @@ app.get('/tshirt', (req, res) => {
             return;
         }
         res.json({ image: `data:image/jpeg;base64,${data}` });
+     });
+ });
+
+// error handling 
+modelAI.stderr.on('data', (data) => {
+        console.error(`stderr: ${data}`);
     });
-});
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
