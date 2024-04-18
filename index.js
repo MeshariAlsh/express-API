@@ -4,7 +4,7 @@ const fs = require('fs');
 const { spawn } = require('child_process')
 const path = require('path');
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 
@@ -17,7 +17,7 @@ app.get('/tshirt', (req, res) => {
 
     } )
 
-    const imagePath = path.join(__dirname, 'test.jpeg');  // Path to your image file
+    const imagePath = path.join(__dirname, 'test.jpg');  // Path to your image file
     fs.readFile(imagePath, { encoding: 'base64' }, (err, data) => {
         if (err) {
             res.status(500).json({ error: 'Failed to load image' });
@@ -27,5 +27,5 @@ app.get('/tshirt', (req, res) => {
     });
 });
 
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
